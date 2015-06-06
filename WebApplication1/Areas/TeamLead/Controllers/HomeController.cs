@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Areas.TeamLead.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : TeamLeadController
     {
         // GET: TeamLead/Home
         public ActionResult Index()

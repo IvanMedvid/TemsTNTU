@@ -7,7 +7,7 @@ using WebApplication1.Controllers;
 
 namespace WebApplication1.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public abstract class AdminController : BaseController
     {
         
