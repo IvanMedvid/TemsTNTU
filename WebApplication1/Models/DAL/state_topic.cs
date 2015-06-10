@@ -21,9 +21,11 @@ namespace WebApplication1.Models.DAL
     
         public int id_st { get; set; }
         public double budget { get; set; }
-        public string time { get; set; }
+        public string time_begin { get; set; }
         public string title { get; set; }
+        public string time_end { get; set; }
     
         public virtual ICollection<artist> artist { get; set; }
+        public virtual stage stage { get; set; }
     }
 }

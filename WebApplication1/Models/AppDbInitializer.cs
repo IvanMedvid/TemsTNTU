@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using WebApplication1.Models.DAL;
 
 namespace WebApplication1.Models
 {
@@ -9,8 +8,7 @@ namespace WebApplication1.Models
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
-
+            
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
             // создаем две роли

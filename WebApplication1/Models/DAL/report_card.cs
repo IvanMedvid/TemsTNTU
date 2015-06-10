@@ -17,7 +17,7 @@ namespace WebApplication1.Models.DAL
         public int id_rc { get; set; }
         public int id_report { get; set; }
         public double fees { get; set; }
-        public int numder { get; set; }
+        public int number { get; set; }
         public string main_job { get; set; }
     
         public virtual report report { get; set; }

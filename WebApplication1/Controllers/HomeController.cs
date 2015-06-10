@@ -20,7 +20,13 @@ namespace WebApplication1.Controllers
                                                     .GetUserManager<ApplicationUserManager>();
             ApplicationUser user = userManager.FindByEmail(User.Identity.Name);
             if (user != null)
+            {
                 roles = userManager.GetRoles(user.Id);
+            }
+            else
+            {
+                return View();
+            }
             foreach (var role in roles)
             {
                    return RedirectToAction("Index", "Home", new {area = role});

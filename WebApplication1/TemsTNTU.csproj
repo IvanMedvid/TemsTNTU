@@ -167,6 +167,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PhaseController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\HomeController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\SuperAdminController.cs" />
     <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
@@ -278,6 +279,8 @@
     <Content Include="Areas\TeamLead\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TeamLead\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\TeamLead\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase\Index.cshtml" />
+    <Content Include="ClassDiagram2.cd" />
     <EntityDeploy Include="Models\DAL\TemsTNTUDataContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TemsTNTUDataContext.Designer.cs</LastGenOutput>
@@ -359,7 +362,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

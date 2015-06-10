@@ -19,16 +19,16 @@ namespace WebApplication1.Models.DAL
             this.report = new HashSet<report>();
         }
     
-        public int id_artist { get; set; }
+        public string id_artist { get; set; }
         public string PIB { get; set; }
-        public int id_degree { get; set; }
-        public int id_rank { get; set; }
-        public int id_post { get; set; }
+        public Nullable<int> id_degree { get; set; }
+        public Nullable<int> id_rank { get; set; }
+        public Nullable<int> id_post { get; set; }
         public string diploma { get; set; }
         public string date_diploma { get; set; }
         public string certificate { get; set; }
         public string date_certificate { get; set; }
-        public int id_st { get; set; }
+        public Nullable<int> id_st { get; set; }
     
         public virtual ICollection<report> report { get; set; }
         public virtual degree degree { get; set; }

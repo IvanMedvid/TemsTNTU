@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TemsTNTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TemsTNTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -19,16 +19,16 @@
           <Key>
             <PropertyRef Name="id_artist" />
           </Key>
-          <Property Name="id_artist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PIB" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="id_degree" Type="int" Nullable="false" />
-          <Property Name="id_rank" Type="int" Nullable="false" />
-          <Property Name="id_post" Type="int" Nullable="false" />
-          <Property Name="diploma" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="date_diploma" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="certificate" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="date_certificate" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="id_st" Type="int" Nullable="false" />
+          <Property Name="id_artist" Type="nvarchar" MaxLength="140" Nullable="false" />
+          <Property Name="PIB" Type="nvarchar" MaxLength="255" />
+          <Property Name="id_degree" Type="int" />
+          <Property Name="id_rank" Type="int" />
+          <Property Name="id_post" Type="int" />
+          <Property Name="diploma" Type="nvarchar" MaxLength="255" />
+          <Property Name="date_diploma" Type="nvarchar" MaxLength="255" />
+          <Property Name="certificate" Type="nvarchar" MaxLength="255" />
+          <Property Name="date_certificate" Type="nvarchar" MaxLength="255" />
+          <Property Name="id_st" Type="int" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -110,7 +110,7 @@
             <PropertyRef Name="id_report" />
           </Key>
           <Property Name="id_report" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_artist" Type="int" Nullable="false" />
+          <Property Name="id_artist" Type="nvarchar" MaxLength="140" Nullable="false" />
           <Property Name="id_stage" Type="int" Nullable="false" />
           <Property Name="stage" Type="text" Nullable="false" />
         </EntityType>
@@ -121,8 +121,8 @@
           <Property Name="id_rc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_report" Type="int" Nullable="false" />
           <Property Name="fees" Type="float" Nullable="false" />
-          <Property Name="numder" Type="int" Nullable="false" />
-          <Property Name="main_job" Type="text" Nullable="false" />
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="main_job" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="stage">
           <Key>
@@ -130,10 +130,11 @@
           </Key>
           <Property Name="id_stage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="number" Type="int" Nullable="false" />
-          <Property Name="time" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="time_begin" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="type" Type="text" Nullable="false" />
+          <Property Name="type_end_value" Type="nvarchar(max)" Nullable="false" />
           <Property Name="id_st" Type="int" Nullable="false" />
+          <Property Name="time_end" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="state_topic">
           <Key>
@@ -141,8 +142,9 @@
           </Key>
           <Property Name="id_st" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="budget" Type="float" Nullable="false" />
-          <Property Name="time" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="time_begin" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="time_end" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -200,6 +202,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_report_card_report">
+          <End Role="report" Type="Self.report" Multiplicity="1" />
+          <End Role="report_card" Type="Self.report_card" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="report">
+              <PropertyRef Name="id_report" />
+            </Principal>
+            <Dependent Role="report_card">
+              <PropertyRef Name="id_rc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stage_state_topic">
+          <End Role="state_topic" Type="Self.state_topic" Multiplicity="1" />
+          <End Role="stage" Type="Self.stage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="state_topic">
+              <PropertyRef Name="id_st" />
+            </Principal>
+            <Dependent Role="stage">
+              <PropertyRef Name="id_stage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="id_artist">
           <End Role="artist" Type="Self.artist" Multiplicity="1" />
           <End Role="report" Type="Self.report" Multiplicity="*" />
@@ -213,7 +239,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_degree">
-          <End Role="degree" Type="Self.degree" Multiplicity="1" />
+          <End Role="degree" Type="Self.degree" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="degree">
@@ -225,7 +251,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_post">
-          <End Role="post" Type="Self.post" Multiplicity="1" />
+          <End Role="post" Type="Self.post" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="post">
@@ -237,7 +263,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_rank">
-          <End Role="rank" Type="Self.rank" Multiplicity="1" />
+          <End Role="rank" Type="Self.rank" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rank">
@@ -248,20 +274,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="id_report">
-          <End Role="report" Type="Self.report" Multiplicity="1" />
-          <End Role="report_card" Type="Self.report_card" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="report">
-              <PropertyRef Name="id_report" />
-            </Principal>
-            <Dependent Role="report_card">
-              <PropertyRef Name="id_report" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="id_st">
-          <End Role="state_topic" Type="Self.state_topic" Multiplicity="1" />
+          <End Role="state_topic" Type="Self.state_topic" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="state_topic">
@@ -315,6 +329,14 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_report_card_report" Association="Self.FK_report_card_report">
+            <End Role="report" EntitySet="report" />
+            <End Role="report_card" EntitySet="report_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stage_state_topic" Association="Self.FK_stage_state_topic">
+            <End Role="state_topic" EntitySet="state_topic" />
+            <End Role="stage" EntitySet="stage" />
+          </AssociationSet>
           <AssociationSet Name="id_artist" Association="Self.id_artist">
             <End Role="artist" EntitySet="artist" />
             <End Role="report" EntitySet="report" />
@@ -331,10 +353,6 @@
             <End Role="rank" EntitySet="rank" />
             <End Role="artist" EntitySet="artist" />
           </AssociationSet>
-          <AssociationSet Name="id_report" Association="Self.id_report">
-            <End Role="report" EntitySet="report" />
-            <End Role="report_card" EntitySet="report_card" />
-          </AssociationSet>
           <AssociationSet Name="id_st" Association="Self.id_st">
             <End Role="state_topic" EntitySet="state_topic" />
             <End Role="artist" EntitySet="artist" />
@@ -344,29 +362,89 @@
             <End Role="report" EntitySet="report" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TemsTNTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="artist">
           <Key>
             <PropertyRef Name="id_artist" />
           </Key>
-          <Property Name="id_artist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PIB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_degree" Type="Int32" Nullable="false" />
-          <Property Name="id_rank" Type="Int32" Nullable="false" />
-          <Property Name="id_post" Type="Int32" Nullable="false" />
-          <Property Name="diploma" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="date_diploma" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="certificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="date_certificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_st" Type="Int32" Nullable="false" />
+          <Property Name="id_artist" Type="String" MaxLength="140" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PIB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="id_degree" Type="Int32" />
+          <Property Name="id_rank" Type="Int32" />
+          <Property Name="id_post" Type="Int32" />
+          <Property Name="diploma" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="date_diploma" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="certificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="date_certificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="id_st" Type="Int32" />
           <NavigationProperty Name="report" Relationship="Self.id_artist" FromRole="artist" ToRole="report" />
           <NavigationProperty Name="degree" Relationship="Self.id_degree" FromRole="artist" ToRole="degree" />
           <NavigationProperty Name="post" Relationship="Self.id_post" FromRole="artist" ToRole="post" />
           <NavigationProperty Name="rank" Relationship="Self.id_rank" FromRole="artist" ToRole="rank" />
           <NavigationProperty Name="state_topic" Relationship="Self.id_st" FromRole="artist" ToRole="state_topic" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="degree">
           <Key>
@@ -400,11 +478,11 @@
             <PropertyRef Name="id_report" />
           </Key>
           <Property Name="id_report" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_artist" Type="Int32" Nullable="false" />
+          <Property Name="id_artist" Type="String" MaxLength="140" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_stage" Type="Int32" Nullable="false" />
           <Property Name="stage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="artist" Relationship="Self.id_artist" FromRole="report" ToRole="artist" />
-          <NavigationProperty Name="report_card" Relationship="Self.id_report" FromRole="report" ToRole="report_card" />
+          <NavigationProperty Name="report_card" Relationship="Self.FK_report_card_report" FromRole="report" ToRole="report_card" />
           <NavigationProperty Name="stage1" Relationship="Self.id_stage" FromRole="report" ToRole="stage" />
         </EntityType>
         <EntityType Name="report_card">
@@ -414,9 +492,9 @@
           <Property Name="id_rc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_report" Type="Int32" Nullable="false" />
           <Property Name="fees" Type="Double" Nullable="false" />
-          <Property Name="numder" Type="Int32" Nullable="false" />
-          <Property Name="main_job" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="report" Relationship="Self.id_report" FromRole="report_card" ToRole="report" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="main_job" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="report" Relationship="Self.FK_report_card_report" FromRole="report_card" ToRole="report" />
         </EntityType>
         <EntityType Name="stage">
           <Key>
@@ -424,11 +502,13 @@
           </Key>
           <Property Name="id_stage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="number" Type="Int32" Nullable="false" />
-          <Property Name="time" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="time_begin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type_end_value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_st" Type="Int32" Nullable="false" />
+          <Property Name="time_end" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="report" Relationship="Self.id_stage" FromRole="stage" ToRole="report" />
+          <NavigationProperty Name="state_topic" Relationship="Self.FK_stage_state_topic" FromRole="stage" ToRole="state_topic" />
         </EntityType>
         <EntityType Name="state_topic">
           <Key>
@@ -436,9 +516,11 @@
           </Key>
           <Property Name="id_st" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="budget" Type="Double" Nullable="false" />
-          <Property Name="time" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="time_begin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="time_end" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="artist" Relationship="Self.id_st" FromRole="state_topic" ToRole="artist" />
+          <NavigationProperty Name="stage" Relationship="Self.FK_stage_state_topic" FromRole="state_topic" ToRole="stage" />
         </EntityType>
         <Association Name="id_artist">
           <End Role="artist" Type="Self.artist" Multiplicity="1" />
@@ -453,7 +535,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_degree">
-          <End Role="degree" Type="Self.degree" Multiplicity="1" />
+          <End Role="degree" Type="Self.degree" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="degree">
@@ -465,7 +547,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_post">
-          <End Role="post" Type="Self.post" Multiplicity="1" />
+          <End Role="post" Type="Self.post" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="post">
@@ -477,7 +559,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_rank">
-          <End Role="rank" Type="Self.rank" Multiplicity="1" />
+          <End Role="rank" Type="Self.rank" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rank">
@@ -489,7 +571,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_st">
-          <End Role="state_topic" Type="Self.state_topic" Multiplicity="1" />
+          <End Role="state_topic" Type="Self.state_topic" Multiplicity="0..1" />
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="state_topic">
@@ -500,15 +582,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="id_report">
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_report_card_report">
           <End Role="report" Type="Self.report" Multiplicity="1" />
-          <End Role="report_card" Type="Self.report_card" Multiplicity="*" />
+          <End Role="report_card" Type="Self.report_card" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="report">
               <PropertyRef Name="id_report" />
             </Principal>
             <Dependent Role="report_card">
-              <PropertyRef Name="id_report" />
+              <PropertyRef Name="id_rc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -524,8 +634,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_stage_state_topic">
+          <End Role="state_topic" Type="Self.state_topic" Multiplicity="1" />
+          <End Role="stage" Type="Self.stage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="state_topic">
+              <PropertyRef Name="id_st" />
+            </Principal>
+            <Dependent Role="stage">
+              <PropertyRef Name="id_stage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="TemsTNTUEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="artist" EntityType="Self.artist" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="degree" EntityType="Self.degree" />
           <EntitySet Name="post" EntityType="Self.post" />
           <EntitySet Name="rank" EntityType="Self.rank" />
@@ -553,7 +684,15 @@
             <End Role="state_topic" EntitySet="state_topic" />
             <End Role="artist" EntitySet="artist" />
           </AssociationSet>
-          <AssociationSet Name="id_report" Association="Self.id_report">
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_report_card_report" Association="Self.FK_report_card_report">
             <End Role="report" EntitySet="report" />
             <End Role="report_card" EntitySet="report_card" />
           </AssociationSet>
@@ -561,121 +700,31 @@
             <End Role="stage" EntitySet="stage" />
             <End Role="report" EntitySet="report" />
           </AssociationSet>
-          <EntitySet Name="C__MigrationHistory" EntityType="TemsTNTUModel.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="TemsTNTUModel.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="TemsTNTUModel.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="TemsTNTUModel.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="TemsTNTUModel.AspNetUsers" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="TemsTNTUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          <AssociationSet Name="FK_stage_state_topic" Association="Self.FK_stage_state_topic">
+            <End Role="state_topic" EntitySet="state_topic" />
+            <End Role="stage" EntitySet="stage" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="TemsTNTUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="TemsTNTUModel.AspNetUserRoles">
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="TemsTNTUModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="TemsTNTUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="TemsTNTUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="TemsTNTUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="TemsTNTUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="TemsTNTUModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="TemsTNTUModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TemsTNTUModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="TemsTNTUModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TemsTNTUModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="TemsTNTUModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="TemsTNTUModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TemsTNTUModelStoreContainer" CdmEntityContainer="TemsTNTUEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="TemsTNTUModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="artist">
             <EntityTypeMapping TypeName="TemsTNTUModel.artist">
               <MappingFragment StoreEntitySet="artist">
@@ -689,6 +738,51 @@
                 <ScalarProperty Name="certificate" ColumnName="certificate" />
                 <ScalarProperty Name="date_certificate" ColumnName="date_certificate" />
                 <ScalarProperty Name="id_st" ColumnName="id_st" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -735,7 +829,7 @@
                 <ScalarProperty Name="id_rc" ColumnName="id_rc" />
                 <ScalarProperty Name="id_report" ColumnName="id_report" />
                 <ScalarProperty Name="fees" ColumnName="fees" />
-                <ScalarProperty Name="numder" ColumnName="numder" />
+                <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="main_job" ColumnName="main_job" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -745,10 +839,11 @@
               <MappingFragment StoreEntitySet="stage">
                 <ScalarProperty Name="id_stage" ColumnName="id_stage" />
                 <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="time_begin" ColumnName="time_begin" />
                 <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="type_end_value" ColumnName="type_end_value" />
                 <ScalarProperty Name="id_st" ColumnName="id_st" />
+                <ScalarProperty Name="time_end" ColumnName="time_end" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -757,72 +852,18 @@
               <MappingFragment StoreEntitySet="state_topic">
                 <ScalarProperty Name="id_st" ColumnName="id_st" />
                 <ScalarProperty Name="budget" ColumnName="budget" />
-                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="time_begin" ColumnName="time_begin" />
                 <ScalarProperty Name="title" ColumnName="title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="TemsTNTUModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="TemsTNTUModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="time_end" ColumnName="time_end" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="TemsTNTUModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

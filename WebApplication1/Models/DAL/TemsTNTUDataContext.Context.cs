@@ -25,7 +25,12 @@ namespace WebApplication1.Models.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<artist> artist { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<degree> degree { get; set; }
         public virtual DbSet<post> post { get; set; }
         public virtual DbSet<rank> rank { get; set; }
@@ -33,10 +38,5 @@ namespace WebApplication1.Models.DAL
         public virtual DbSet<report_card> report_card { get; set; }
         public virtual DbSet<stage> stage { get; set; }
         public virtual DbSet<state_topic> state_topic { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

@@ -14,18 +14,13 @@ namespace WebApplication1.Models.DAL
     
     public partial class report
     {
-        public report()
-        {
-            this.report_card = new HashSet<report_card>();
-        }
-    
         public int id_report { get; set; }
-        public int id_artist { get; set; }
+        public string id_artist { get; set; }
         public int id_stage { get; set; }
         public string stage { get; set; }
     
         public virtual artist artist { get; set; }
-        public virtual ICollection<report_card> report_card { get; set; }
+        public virtual report_card report_card { get; set; }
         public virtual stage stage1 { get; set; }
     }
 }
