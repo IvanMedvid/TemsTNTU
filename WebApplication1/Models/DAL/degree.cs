@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace WebApplication1.Models.DAL
 {
     using System;
@@ -20,7 +22,13 @@ namespace WebApplication1.Models.DAL
         }
     
         public int id_degree { get; set; }
+
+        [Required(ErrorMessage = "Поле повинне бути заповненим")]
+        [StringLength(255, MinimumLength = 8, ErrorMessage = "Довжина стрічки не повинна бути меншою за 3 символи")]
         public string title { get; set; }
+
+        [Required(ErrorMessage = "Поле повинне бути заповненим")]
+        [Range(0.00, 100, ErrorMessage = "Допускаються числа від 0 до 100")]
         public double surcharge { get; set; }
     
         public virtual ICollection<artist> artist { get; set; }

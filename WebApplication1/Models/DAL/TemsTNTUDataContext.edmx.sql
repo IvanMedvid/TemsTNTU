@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/06/2015 11:15:29
+-- Date Created: 06/14/2015 22:50:45
 -- Generated from EDMX file: C:\Users\medjo_000\Documents\Visual Studio 2013\Projects\WebApplication1\WebApplication1\Models\DAL\TemsTNTUDataContext.edmx
 -- --------------------------------------------------
 
@@ -29,8 +29,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId];
 GO
-IF OBJECT_ID(N'[dbo].[FK_id_artist]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[report] DROP CONSTRAINT [FK_id_artist];
+IF OBJECT_ID(N'[dbo].[FK_report_artist]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[report] DROP CONSTRAINT [FK_report_artist];
+GO
+IF OBJECT_ID(N'[dbo].[FK_report_card_report]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[report_card] DROP CONSTRAINT [FK_report_card_report];
+GO
+IF OBJECT_ID(N'[dbo].[FK_stage_state_topic]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[stage] DROP CONSTRAINT [FK_stage_state_topic];
 GO
 IF OBJECT_ID(N'[dbo].[FK_id_degree]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[artist] DROP CONSTRAINT [FK_id_degree];
@@ -40,9 +46,6 @@ IF OBJECT_ID(N'[dbo].[FK_id_post]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_id_rank]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[artist] DROP CONSTRAINT [FK_id_rank];
-GO
-IF OBJECT_ID(N'[dbo].[FK_id_report]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[report_card] DROP CONSTRAINT [FK_id_report];
 GO
 IF OBJECT_ID(N'[dbo].[FK_id_st]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[artist] DROP CONSTRAINT [FK_id_st];
@@ -102,90 +105,28 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'artist'
-CREATE TABLE [dbo].[artist] (
-    [id_artist] int IDENTITY(1,1) NOT NULL,
-    [PIB] nvarchar(255)  NOT NULL,
-    [id_degree] int  NOT NULL,
-    [id_rank] int  NOT NULL,
-    [id_post] int  NOT NULL,
-    [diploma] nvarchar(255)  NOT NULL,
-    [date_diploma] nvarchar(255)  NOT NULL,
-    [certificate] nvarchar(255)  NOT NULL,
-    [date_certificate] nvarchar(255)  NOT NULL,
-    [id_st] int  NOT NULL
-);
-GO
-
--- Creating table 'degree'
-CREATE TABLE [dbo].[degree] (
-    [id_degree] int IDENTITY(1,1) NOT NULL,
-    [title] nvarchar(255)  NOT NULL,
-    [surcharge] float  NOT NULL
-);
-GO
-
--- Creating table 'post'
-CREATE TABLE [dbo].[post] (
-    [id_post] int IDENTITY(1,1) NOT NULL,
-    [title] nvarchar(255)  NOT NULL,
-    [salary] float  NOT NULL
-);
-GO
-
--- Creating table 'rank'
-CREATE TABLE [dbo].[rank] (
-    [id_rank] int IDENTITY(1,1) NOT NULL,
-    [surcharge] float  NOT NULL,
-    [title] nvarchar(255)  NOT NULL
-);
-GO
-
--- Creating table 'report'
-CREATE TABLE [dbo].[report] (
-    [id_report] int IDENTITY(1,1) NOT NULL,
-    [id_artist] int  NOT NULL,
-    [id_stage] int  NOT NULL,
-    [stage] varchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'report_card'
-CREATE TABLE [dbo].[report_card] (
-    [id_rc] int IDENTITY(1,1) NOT NULL,
-    [id_report] int  NOT NULL,
-    [fees] float  NOT NULL,
-    [numder] int  NOT NULL,
-    [main_job] varchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'stage'
-CREATE TABLE [dbo].[stage] (
-    [id_stage] int IDENTITY(1,1) NOT NULL,
-    [number] int  NOT NULL,
-    [time] nvarchar(255)  NOT NULL,
-    [title] nvarchar(255)  NOT NULL,
-    [type] varchar(max)  NOT NULL,
-    [id_st] int  NOT NULL
-);
-GO
-
--- Creating table 'state_topic'
-CREATE TABLE [dbo].[state_topic] (
-    [id_st] int IDENTITY(1,1) NOT NULL,
-    [budget] float  NOT NULL,
-    [time] nvarchar(255)  NOT NULL,
-    [title] nvarchar(255)  NOT NULL
-);
-GO
-
 -- Creating table 'C__MigrationHistory'
 CREATE TABLE [dbo].[C__MigrationHistory] (
     [MigrationId] nvarchar(150)  NOT NULL,
     [ContextKey] nvarchar(300)  NOT NULL,
     [Model] varbinary(max)  NOT NULL,
     [ProductVersion] nvarchar(32)  NOT NULL
+);
+GO
+
+-- Creating table 'artist'
+CREATE TABLE [dbo].[artist] (
+    [id_artist] nvarchar(128)  NOT NULL,
+    [PIB] nvarchar(255)  NULL,
+    [id_degree] int  NULL,
+    [id_rank] int  NULL,
+    [id_post] int  NULL,
+    [diploma] nvarchar(255)  NULL,
+    [date_diploma] nvarchar(255)  NULL,
+    [certificate] nvarchar(255)  NULL,
+    [date_certificate] nvarchar(255)  NULL,
+    [id_st] int  NULL,
+    [id_stage] int  NULL
 );
 GO
 
@@ -230,6 +171,72 @@ CREATE TABLE [dbo].[AspNetUsers] (
 );
 GO
 
+-- Creating table 'degree'
+CREATE TABLE [dbo].[degree] (
+    [id_degree] int IDENTITY(1,1) NOT NULL,
+    [title] nvarchar(255)  NOT NULL,
+    [surcharge] float  NOT NULL
+);
+GO
+
+-- Creating table 'post'
+CREATE TABLE [dbo].[post] (
+    [id_post] int IDENTITY(1,1) NOT NULL,
+    [title] nvarchar(255)  NOT NULL,
+    [salary] float  NOT NULL
+);
+GO
+
+-- Creating table 'rank'
+CREATE TABLE [dbo].[rank] (
+    [id_rank] int IDENTITY(1,1) NOT NULL,
+    [surcharge] float  NOT NULL,
+    [title] nvarchar(255)  NOT NULL
+);
+GO
+
+-- Creating table 'report'
+CREATE TABLE [dbo].[report] (
+    [id_report] int IDENTITY(1,1) NOT NULL,
+    [id_artist] nvarchar(128)  NOT NULL,
+    [id_stage] int  NOT NULL,
+    [stage] varchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'report_card'
+CREATE TABLE [dbo].[report_card] (
+    [id_rc] int IDENTITY(1,1) NOT NULL,
+    [id_report] int  NOT NULL,
+    [fees] float  NOT NULL,
+    [number] int  NOT NULL,
+    [main_job] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'stage'
+CREATE TABLE [dbo].[stage] (
+    [id_stage] int IDENTITY(1,1) NOT NULL,
+    [number] int  NOT NULL,
+    [time_begin] nvarchar(255)  NOT NULL,
+    [title] nvarchar(255)  NOT NULL,
+    [type_end_value] nvarchar(max)  NOT NULL,
+    [id_st] int  NOT NULL,
+    [time_end] nvarchar(255)  NULL,
+    [id_artist] nvarchar(128)  NULL
+);
+GO
+
+-- Creating table 'state_topic'
+CREATE TABLE [dbo].[state_topic] (
+    [id_st] int IDENTITY(1,1) NOT NULL,
+    [budget] float  NOT NULL,
+    [time_begin] nvarchar(255)  NOT NULL,
+    [title] nvarchar(255)  NOT NULL,
+    [time_end] nvarchar(255)  NULL
+);
+GO
+
 -- Creating table 'AspNetUserRoles'
 CREATE TABLE [dbo].[AspNetUserRoles] (
     [AspNetRoles_Id] nvarchar(128)  NOT NULL,
@@ -237,14 +244,51 @@ CREATE TABLE [dbo].[AspNetUserRoles] (
 );
 GO
 
+-- Creating table 'artiststage'
+CREATE TABLE [dbo].[artiststage] (
+    [artist_id_artist] nvarchar(128)  NOT NULL,
+    [stage_id_stage] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
+
+-- Creating primary key on [MigrationId], [ContextKey] in table 'C__MigrationHistory'
+ALTER TABLE [dbo].[C__MigrationHistory]
+ADD CONSTRAINT [PK_C__MigrationHistory]
+    PRIMARY KEY CLUSTERED ([MigrationId], [ContextKey] ASC);
+GO
 
 -- Creating primary key on [id_artist] in table 'artist'
 ALTER TABLE [dbo].[artist]
 ADD CONSTRAINT [PK_artist]
     PRIMARY KEY CLUSTERED ([id_artist] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetRoles'
+ALTER TABLE [dbo].[AspNetRoles]
+ADD CONSTRAINT [PK_AspNetRoles]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetUserClaims'
+ALTER TABLE [dbo].[AspNetUserClaims]
+ADD CONSTRAINT [PK_AspNetUserClaims]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [LoginProvider], [ProviderKey], [UserId] in table 'AspNetUserLogins'
+ALTER TABLE [dbo].[AspNetUserLogins]
+ADD CONSTRAINT [PK_AspNetUserLogins]
+    PRIMARY KEY CLUSTERED ([LoginProvider], [ProviderKey], [UserId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetUsers'
+ALTER TABLE [dbo].[AspNetUsers]
+ADD CONSTRAINT [PK_AspNetUsers]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [id_degree] in table 'degree'
@@ -289,40 +333,16 @@ ADD CONSTRAINT [PK_state_topic]
     PRIMARY KEY CLUSTERED ([id_st] ASC);
 GO
 
--- Creating primary key on [MigrationId], [ContextKey] in table 'C__MigrationHistory'
-ALTER TABLE [dbo].[C__MigrationHistory]
-ADD CONSTRAINT [PK_C__MigrationHistory]
-    PRIMARY KEY CLUSTERED ([MigrationId], [ContextKey] ASC);
-GO
-
--- Creating primary key on [Id] in table 'AspNetRoles'
-ALTER TABLE [dbo].[AspNetRoles]
-ADD CONSTRAINT [PK_AspNetRoles]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'AspNetUserClaims'
-ALTER TABLE [dbo].[AspNetUserClaims]
-ADD CONSTRAINT [PK_AspNetUserClaims]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [LoginProvider], [ProviderKey], [UserId] in table 'AspNetUserLogins'
-ALTER TABLE [dbo].[AspNetUserLogins]
-ADD CONSTRAINT [PK_AspNetUserLogins]
-    PRIMARY KEY CLUSTERED ([LoginProvider], [ProviderKey], [UserId] ASC);
-GO
-
--- Creating primary key on [Id] in table 'AspNetUsers'
-ALTER TABLE [dbo].[AspNetUsers]
-ADD CONSTRAINT [PK_AspNetUsers]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [AspNetRoles_Id], [AspNetUsers_Id] in table 'AspNetUserRoles'
 ALTER TABLE [dbo].[AspNetUserRoles]
 ADD CONSTRAINT [PK_AspNetUserRoles]
     PRIMARY KEY CLUSTERED ([AspNetRoles_Id], [AspNetUsers_Id] ASC);
+GO
+
+-- Creating primary key on [artist_id_artist], [stage_id_stage] in table 'artiststage'
+ALTER TABLE [dbo].[artiststage]
+ADD CONSTRAINT [PK_artiststage]
+    PRIMARY KEY CLUSTERED ([artist_id_artist], [stage_id_stage] ASC);
 GO
 
 -- --------------------------------------------------
@@ -331,15 +351,15 @@ GO
 
 -- Creating foreign key on [id_artist] in table 'report'
 ALTER TABLE [dbo].[report]
-ADD CONSTRAINT [FK_id_artist]
+ADD CONSTRAINT [FK_report_artist]
     FOREIGN KEY ([id_artist])
     REFERENCES [dbo].[artist]
         ([id_artist])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_id_artist'
-CREATE INDEX [IX_FK_id_artist]
+-- Creating non-clustered index for FOREIGN KEY 'FK_report_artist'
+CREATE INDEX [IX_FK_report_artist]
 ON [dbo].[report]
     ([id_artist]);
 GO
@@ -404,36 +424,6 @@ ON [dbo].[artist]
     ([id_st]);
 GO
 
--- Creating foreign key on [id_report] in table 'report_card'
-ALTER TABLE [dbo].[report_card]
-ADD CONSTRAINT [FK_id_report]
-    FOREIGN KEY ([id_report])
-    REFERENCES [dbo].[report]
-        ([id_report])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_id_report'
-CREATE INDEX [IX_FK_id_report]
-ON [dbo].[report_card]
-    ([id_report]);
-GO
-
--- Creating foreign key on [id_stage] in table 'report'
-ALTER TABLE [dbo].[report]
-ADD CONSTRAINT [FK_id_stage]
-    FOREIGN KEY ([id_stage])
-    REFERENCES [dbo].[stage]
-        ([id_stage])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_id_stage'
-CREATE INDEX [IX_FK_id_stage]
-ON [dbo].[report]
-    ([id_stage]);
-GO
-
 -- Creating foreign key on [UserId] in table 'AspNetUserClaims'
 ALTER TABLE [dbo].[AspNetUserClaims]
 ADD CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]
@@ -464,6 +454,39 @@ ON [dbo].[AspNetUserLogins]
     ([UserId]);
 GO
 
+-- Creating foreign key on [id_rc] in table 'report_card'
+ALTER TABLE [dbo].[report_card]
+ADD CONSTRAINT [FK_report_card_report]
+    FOREIGN KEY ([id_rc])
+    REFERENCES [dbo].[report]
+        ([id_report])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [id_stage] in table 'report'
+ALTER TABLE [dbo].[report]
+ADD CONSTRAINT [FK_id_stage]
+    FOREIGN KEY ([id_stage])
+    REFERENCES [dbo].[stage]
+        ([id_stage])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_id_stage'
+CREATE INDEX [IX_FK_id_stage]
+ON [dbo].[report]
+    ([id_stage]);
+GO
+
+-- Creating foreign key on [id_stage] in table 'stage'
+ALTER TABLE [dbo].[stage]
+ADD CONSTRAINT [FK_stage_state_topic]
+    FOREIGN KEY ([id_stage])
+    REFERENCES [dbo].[state_topic]
+        ([id_st])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
 -- Creating foreign key on [AspNetRoles_Id] in table 'AspNetUserRoles'
 ALTER TABLE [dbo].[AspNetUserRoles]
 ADD CONSTRAINT [FK_AspNetUserRoles_AspNetRoles]
@@ -486,6 +509,30 @@ GO
 CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [artist_id_artist] in table 'artiststage'
+ALTER TABLE [dbo].[artiststage]
+ADD CONSTRAINT [FK_artiststage_artist]
+    FOREIGN KEY ([artist_id_artist])
+    REFERENCES [dbo].[artist]
+        ([id_artist])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [stage_id_stage] in table 'artiststage'
+ALTER TABLE [dbo].[artiststage]
+ADD CONSTRAINT [FK_artiststage_stage]
+    FOREIGN KEY ([stage_id_stage])
+    REFERENCES [dbo].[stage]
+        ([id_stage])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_artiststage_stage'
+CREATE INDEX [IX_FK_artiststage_stage]
+ON [dbo].[artiststage]
+    ([stage_id_stage]);
 GO
 
 -- --------------------------------------------------

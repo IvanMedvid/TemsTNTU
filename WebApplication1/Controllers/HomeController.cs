@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            IList<string> roles = new List<string> { "Роль не определена" };
+            IList<string> roles = new List<string> { "Роль не визначена" };
             ApplicationUserManager userManager = HttpContext.GetOwinContext()
                                                     .GetUserManager<ApplicationUserManager>();
             ApplicationUser user = userManager.FindByEmail(User.Identity.Name);

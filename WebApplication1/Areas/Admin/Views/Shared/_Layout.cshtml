@@ -22,6 +22,8 @@
         <ul class="nav navmenu-nav">
             @Html.Partial("~/Views/Shared/_LoginPartial.cshtml")
             @Html.ActionLink("Етап", "Index", "Phase")
+           
+            <li>@Html.ActionLink("Персональні дані", "Index", "UserInformations", new{area = "Admin"}, null)</li>
         </ul>
         @*            </div>*@
         @*        </div>*@

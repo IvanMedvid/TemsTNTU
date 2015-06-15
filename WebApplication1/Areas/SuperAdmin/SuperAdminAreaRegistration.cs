@@ -20,7 +20,7 @@ namespace WebApplication1.Areas.SuperAdmin
             context.MapRoute(
                 "SuperAdmin_default",
                 "SuperAdmin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", controller = "Home", id = UrlParameter.Optional }
             );
         }
     }
