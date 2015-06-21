@@ -166,10 +166,11 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\artistsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArtistController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\PhaseController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserInformationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportCardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StageController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\ArtistController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\DegreeController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\HomeController.cs" />
@@ -178,7 +179,11 @@
     <Compile Include="Areas\SuperAdmin\Controllers\StateTopicController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\SuperAdminController.cs" />
     <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
+    <Compile Include="Areas\TeamLead\Controllers\ArtistController.cs" />
     <Compile Include="Areas\TeamLead\Controllers\HomeController.cs" />
+    <Compile Include="Areas\TeamLead\Controllers\ReportCardController.cs" />
+    <Compile Include="Areas\TeamLead\Controllers\ReportController.cs" />
+    <Compile Include="Areas\TeamLead\Controllers\StageController.cs" />
     <Compile Include="Areas\TeamLead\Controllers\TeamLeadController.cs" />
     <Compile Include="Areas\TeamLead\TeamLeadAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -287,14 +292,7 @@
     <Content Include="Areas\TeamLead\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TeamLead\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\TeamLead\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Phase\Index.cshtml" />
     <Content Include="ClassDiagram2.cd" />
-    <Content Include="Areas\Admin\Views\UserInformations\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\artists\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\artists\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\artists\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\artists\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\artists\Index.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\Artist\Create.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\Artist\Delete.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\Artist\Details.cshtml" />
@@ -315,11 +313,41 @@
     <Content Include="Areas\SuperAdmin\Views\Rank\Details.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\Rank\Edit.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\Rank\Index.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\StateTopic\Create.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\StateTopic\Delete.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\StateTopic\Details.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\StateTopic\Edit.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\StateTopic\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Stage\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Stage\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Stage\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Stage\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Stage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportCard\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportCard\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportCard\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportCard\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportCard\Index.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Stage\Create.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Stage\Delete.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Stage\Details.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Stage\Edit.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Stage\Index.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Report\Create.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Report\Delete.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Report\Details.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Report\Edit.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Report\Index.cshtml" />
+    <Content Include="Areas\TeamLead\Views\ReportCard\Create.cshtml" />
+    <Content Include="Areas\TeamLead\Views\ReportCard\Delete.cshtml" />
+    <Content Include="Areas\TeamLead\Views\ReportCard\Details.cshtml" />
+    <Content Include="Areas\TeamLead\Views\ReportCard\Edit.cshtml" />
+    <Content Include="Areas\TeamLead\Views\ReportCard\Index.cshtml" />
     <EntityDeploy Include="Models\DAL\TemsTNTUDataContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TemsTNTUDataContext.Designer.cs</LastGenOutput>
@@ -337,6 +365,16 @@
       <DependentUpon>TemsTNTUDataContext.edmx</DependentUpon>
       <LastGenOutput>TemsTNTUDataContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\SuperAdmin\Views\StateTopic\Create.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\StateTopic\Delete.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\StateTopic\Details.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\StateTopic\Edit.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\StateTopic\Index.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Artist\Create.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Artist\Delete.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Artist\Details.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Artist\Edit.cshtml" />
+    <Content Include="Areas\TeamLead\Views\Artist\Index.cshtml" />
     <None Include="Properties\PublishProfiles\IvanMedvid.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -392,7 +430,6 @@
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\SuperAdmin\Models\" />
     <Folder Include="Areas\TeamLead\Models\" />
-    <Folder Include="Areas\TeamLead\Views\TeamLead\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

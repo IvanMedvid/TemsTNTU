@@ -159,7 +159,7 @@ namespace WebApplication1.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "SuperAdmin");
+                    await UserManager.AddToRoleAsync(user.Id, "Admin");
                     db.artist.Add(new artist
                     {
                         id_artist = user.Id

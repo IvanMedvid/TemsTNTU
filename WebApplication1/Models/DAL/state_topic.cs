@@ -24,8 +24,10 @@ namespace WebApplication1.Models.DAL
         public string time_begin { get; set; }
         public string title { get; set; }
         public string time_end { get; set; }
+        public string id_artist { get; set; }
     
         public virtual ICollection<artist> artist { get; set; }
+        public virtual artist artist1 { get; set; }
         public virtual stage stage { get; set; }
     }
 }

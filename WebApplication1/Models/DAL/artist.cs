@@ -17,6 +17,7 @@ namespace WebApplication1.Models.DAL
         public artist()
         {
             this.report = new HashSet<report>();
+            this.state_topic1 = new HashSet<state_topic>();
             this.stage = new HashSet<stage>();
         }
     
@@ -32,11 +33,12 @@ namespace WebApplication1.Models.DAL
         public Nullable<int> id_st { get; set; }
         public Nullable<int> id_stage { get; set; }
     
-        public virtual ICollection<report> report { get; set; }
         public virtual degree degree { get; set; }
         public virtual post post { get; set; }
         public virtual rank rank { get; set; }
         public virtual state_topic state_topic { get; set; }
+        public virtual ICollection<report> report { get; set; }
+        public virtual ICollection<state_topic> state_topic1 { get; set; }
         public virtual ICollection<stage> stage { get; set; }
     }
 }

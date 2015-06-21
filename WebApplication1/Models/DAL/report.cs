@@ -20,7 +20,7 @@ namespace WebApplication1.Models.DAL
         public string stage { get; set; }
     
         public virtual artist artist { get; set; }
-        public virtual report_card report_card { get; set; }
         public virtual stage stage1 { get; set; }
+        public virtual report_card report_card { get; set; }
     }
 }
