@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.artist>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PIB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.diploma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_diploma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.certificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_certificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_stage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.degree.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.post.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rank.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state_topic.time_begin)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PIB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diploma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_diploma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.certificate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_certificate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_stage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.degree.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.post.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rank.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state_topic.time_begin)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id_artist }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id_artist }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id_artist })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

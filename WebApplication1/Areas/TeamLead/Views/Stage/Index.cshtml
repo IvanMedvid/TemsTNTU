@@ -1,0 +1,79 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.stage>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.time_begin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type_end_value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_st)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.time_end)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state_topic.time_begin)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_begin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type_end_value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_st)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_artist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state_topic.time_begin)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id_stage }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id_stage }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id_stage })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

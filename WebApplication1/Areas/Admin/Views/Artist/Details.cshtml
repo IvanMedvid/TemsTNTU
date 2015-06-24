@@ -1,0 +1,106 @@
+﻿@model WebApplication1.Models.DAL.artist
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>artist</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PIB)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PIB)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.diploma)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.diploma)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.date_diploma)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.date_diploma)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.certificate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.certificate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.date_certificate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.date_certificate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.id_stage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.id_stage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.degree.title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.degree.title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.post.title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.post.title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.rank.title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.rank.title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.state_topic.time_begin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.state_topic.time_begin)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_artist }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

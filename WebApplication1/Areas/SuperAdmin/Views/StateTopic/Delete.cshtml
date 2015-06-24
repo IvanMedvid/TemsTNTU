@@ -1,0 +1,73 @@
+﻿@model WebApplication1.Models.DAL.state_topic
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Ви дійсно хочете видалити дані про цю тему?</h3>
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelForModel("Назва теми")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.title)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Бюджет")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.budget)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Дата початку виконання")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.time_begin)
+            </dd>
+
+
+
+            <dt>
+                @Html.LabelForModel("Дата завершення виконання")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.time_end)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Керівник теми")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.artist1.PIB)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color btn-group">
+        <input type="submit" value="Видалити" class="btn btn-default" />
+        @Html.ActionLink("Повернутися до списку", "Index", null, new { @class = "btn btn-default" })
+    </div>
+        }
+    </div>
+</body>
+</html>

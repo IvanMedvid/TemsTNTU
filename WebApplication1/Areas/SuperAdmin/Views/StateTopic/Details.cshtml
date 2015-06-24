@@ -1,0 +1,64 @@
+﻿@model WebApplication1.Models.DAL.state_topic
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Детальна інформація про наукову тему</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelForModel("Назва теми")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.title)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Бюджет")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.budget)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Дата початку виконання")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.time_begin)
+            </dd>
+
+
+            <dt>
+                @Html.LabelForModel("Дата завершення виконання")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.time_end)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Керівник теми")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.artist1.PIB)
+            </dd>
+
+        </dl>
+    </div>
+    <p class="btn-group">
+        @Html.ActionLink("Редагувати", "Edit", new { id = Model.id_st }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Назад до списку", "Index", null, new { @class = "btn btn-default" })
+    </p>
+</body>
+</html>

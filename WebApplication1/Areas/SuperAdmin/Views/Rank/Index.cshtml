@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.rank>
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Вчені звання</h1>
+    <p class="lead">Ця сторінка призначена для додання, редагування та видалення інформації про вчені звання.</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.LabelForModel("Назва вченого звання")
+        </th>
+        <th>
+            @Html.LabelForModel("Доплата, %")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surcharge)
+            </td>
+
+            <td class="btn-group" role="group">
+                @Html.ActionLink("Редагувати", "Edit", new { id = item.id_rank }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Видалити", "Delete", new { id = item.id_rank }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+    @Html.ActionLink("Додати нове", "Create", null, new { @class = "btn btn-default" })
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@model WebApplication1.Models.DAL.degree
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Детальна інформація про науковий ступінь</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelForModel("Назва наукового ступеня")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.title)
+            </dd>
+    
+            <dt>
+                @Html.LabelForModel("Доплата")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.surcharge)
+            </dd>
+    
+        </dl>
+    </div>
+    <p class="btn-group">
+        @Html.ActionLink("Редагувати", "Edit", new { id = Model.id_degree }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Назад до списку", "Index", null, new { @class = "btn btn-default" })
+    </p>
+</body>
+</html>

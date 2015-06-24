@@ -1,0 +1,86 @@
+﻿@model WebApplication1.Models.DAL.stage
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>stage</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.number)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.number)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.time_begin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.time_begin)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.type_end_value)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.type_end_value)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.id_st)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.id_st)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.time_end)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.time_end)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.id_artist)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.id_artist)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.state_topic.time_begin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.state_topic.time_begin)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_stage }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

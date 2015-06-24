@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.report_card>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+ 
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_report)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fees)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.main_job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.report.id_artist)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_report)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fees)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.main_job)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.report.id_artist)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id_rc }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id_rc }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id_rc })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

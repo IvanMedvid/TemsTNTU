@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.post>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        <div class="container">
+            <h1>Посади</h1>
+    <p class="lead">Ця сторінка призначена для додання, редагування та видалення посад.</p>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.LabelForModel("Назва посади")
+                </th>
+                <th>
+                    @Html.LabelForModel("Оклад, грн.")
+                </th>
+
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.salary)
+                    </td>
+
+
+                    <td class="btn-group" role="group">
+                        @Html.ActionLink("Редагувати", "Edit", new {id = item.id_post}, new {@class = "btn btn-default"})
+                        @Html.ActionLink("Видалити", "Delete", new {id = item.id_post}, new {@class = "btn btn-default"})
+                    </td>
+                </tr>
+            }
+
+        </table>
+    @Html.ActionLink("Додати нову", "Create", null, new { @class = "btn btn-default" })
+</body>
+</html>

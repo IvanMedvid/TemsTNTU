@@ -1,0 +1,88 @@
+﻿@model WebApplication1.Models.DAL.artist
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Персональні дані</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelForModel("Прізвище ім'я по-батькові")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PIB)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Науковий ступінь")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.degree.title)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Посада")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.post.title)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Вчене звання")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.rank.title)
+            </dd>
+
+            <dt>
+                @Html.LabelForModel("Диплом")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.diploma)
+            </dd>
+    
+            <dt>
+                @Html.LabelForModel("Дата видачі диплому")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.date_diploma)
+            </dd>
+    
+            <dt>
+                @Html.LabelForModel("Атестат")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.certificate)
+            </dd>
+    
+            <dt>
+                @Html.LabelForModel("Дата видачі атестату")
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.date_certificate)
+            </dd>
+    
+
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Редагувати дані", "Edit", new { id = Model.id_artist })
+    </p>
+</body>
+</html>

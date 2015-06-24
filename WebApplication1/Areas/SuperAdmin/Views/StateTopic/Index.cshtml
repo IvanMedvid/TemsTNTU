@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.state_topic>
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    
+        <h1>Державні теми</h1>
+        <p class="lead">Ця сторінка призначена для додання, редагування та видалення державних тем.</p>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.LabelForModel("Назва теми")
+        </th>
+        <th>
+            @Html.LabelForModel("Бюджет")
+        </th>
+        <th>
+            @Html.LabelForModel("Дата початку виконання")
+        </th>
+        <th>
+            @Html.LabelForModel("Дата завершення виконання")
+        </th>
+        <th>
+            @Html.LabelForModel("Керівник теми")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.budget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_begin)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.time_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.artist1.PIB)
+            </td>
+            <td class="btn-group btn-group-xs" role="group">
+                @Html.ActionLink("Редагувати", "Edit", new { id = item.id_st }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Деталі", "Details", new { id = item.id_st }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Видалити", "Delete", new { id = item.id_st }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+    @Html.ActionLink("Додати нову тему", "Create", null, new { @class = "btn btn-default" })
+</body>
+</html>

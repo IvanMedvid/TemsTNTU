@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.report>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.stage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.artist.PIB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.report_card.main_job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stage1.time_begin)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.stage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.artist.PIB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.report_card.main_job)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stage1.time_begin)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id_report }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id_report }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id_report })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

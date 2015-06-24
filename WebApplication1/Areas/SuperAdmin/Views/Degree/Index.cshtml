@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication1.Models.DAL.degree>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Наукові ступені</h1>
+        <p class="lead">Ця сторінка призначена для додання, редагування та видалення наукових ступенів.</p>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.LabelForModel("Назва наукового ступеня")
+                </th>
+                <th>
+                    @Html.LabelForModel("Доплата, %")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surcharge)
+                    </td>
+                    <td class="btn-group" role="group">
+                        @Html.ActionLink("Редагувати", "Edit", new { id = item.id_degree }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Деталі", "Details", new { id = item.id_degree }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Видалити", "Delete", new { id = item.id_degree }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        @Html.ActionLink("Додати новий", "Create", null, new { @class = "btn btn-default" })
+
+    </div>
+</body>
+</html>

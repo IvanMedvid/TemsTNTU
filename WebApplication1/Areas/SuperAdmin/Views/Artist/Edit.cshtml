@@ -1,0 +1,122 @@
+﻿@model WebApplication1.Models.DAL.artist
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>artist</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id_artist)
+    
+            <div class="form-group">
+                @Html.LabelForModel("Прізвище ім'я по-батькові", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PIB, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PIB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelForModel("Науковий ступінь",  htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("id_degree", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_degree, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelForModel("Вчене звання", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("id_rank", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_rank, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelForModel("Посада", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("id_post", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_post, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelForModel("Диплом", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.diploma, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.diploma, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelForModel("Дата видачі диплому", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.date_diploma, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                    @Html.ValidationMessageFor(model => model.date_diploma, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelForModel("Атестат", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.certificate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.certificate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelForModel("Дата видачі атестату", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.date_certificate, new { htmlAttributes = new { @class = "form-control", @id = "datepicker1" } })
+                    @Html.ValidationMessageFor(model => model.date_certificate, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Зберегти зміни" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+<div>
+    @Html.ActionLink("Відмінити редагування", "Index")
+</div>
+    @section scripts
+    {
+        <script type="text/javascript">
+            $("#datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                dayNamesMin: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                monthNames: ["Січень", "Лютий", "Березень",
+                            "Квітень", "Травень", "Червень",
+                            "Липень", "Серпень", "Вересень",
+                            "Жовтень", "Листопад", "Грудень"],
+                firstDay: 1
+
+            });
+            $("#datepicker1").datepicker({
+                dateFormat: "dd-mm-yy",
+                dayNamesMin: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                monthNames: ["Січень", "Лютий", "Березень",
+                            "Квітень", "Травень", "Червень",
+                            "Липень", "Серпень", "Вересень",
+                            "Жовтень", "Листопад", "Грудень"],
+                firstDay: 1
+
+            });
+        </script>
+    }
+</body>
+</html>
