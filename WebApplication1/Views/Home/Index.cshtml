@@ -1,10 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutWord.cshtml";
 }
 
-
-<div>
-    @Html.Partial("_LoginPartial")
-    <h1>Це головна сторінка сайту</h1>
-</div>
- 
+@if (ViewBag.WordDocumentMode == null || !ViewBag.WordDocumentMode)
+{
+    <div>
+        @Html.Partial("_LoginPartial")
+        <h1>Це головна сторінка сайту</h1>
+    </div>
+}

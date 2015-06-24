@@ -17,6 +17,7 @@ namespace WebApplication1.Models.DAL
         public state_topic()
         {
             this.artist = new HashSet<artist>();
+            this.stage1 = new HashSet<stage>();
         }
     
         public int id_st { get; set; }
@@ -28,6 +29,6 @@ namespace WebApplication1.Models.DAL
     
         public virtual ICollection<artist> artist { get; set; }
         public virtual artist artist1 { get; set; }
-        public virtual stage stage { get; set; }
+        public virtual ICollection<stage> stage1 { get; set; }
     }
 }

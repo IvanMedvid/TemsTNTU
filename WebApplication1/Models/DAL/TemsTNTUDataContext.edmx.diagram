@@ -27,10 +27,13 @@
         <AssociationConnector Association="TemsTNTUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="TemsTNTUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="TemsTNTUModel.FK_id_stage" ManuallyRouted="false" />
-        <AssociationConnector Association="TemsTNTUModel.FK_report_card_report" ManuallyRouted="false" />
-        <AssociationConnector Association="TemsTNTUModel.FK_stage_state_topic" ManuallyRouted="false" />
-        <AssociationConnector Association="TemsTNTUModel.artiststage" ManuallyRouted="false" />
+        <AssociationConnector Association="TemsTNTUModel.artiststage" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5" PointY="5.8674702962239582" />
+          <ConnectorPoint PointX="7.5" PointY="5.8674702962239582" />
+        </AssociationConnector>
         <AssociationConnector Association="TemsTNTUModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="TemsTNTUModel.FK_stage_state_topic1" />
+        <AssociationConnector Association="TemsTNTUModel.FK_report_card_report1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

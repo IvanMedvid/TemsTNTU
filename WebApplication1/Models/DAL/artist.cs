@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace WebApplication1.Models.DAL
 {
     using System;

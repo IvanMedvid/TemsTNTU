@@ -1,7 +1,7 @@
 ﻿@using WebApplication1.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Выполнить вход";
+    ViewBag.Title = "Здійснити вхід";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -11,7 +11,7 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Используйте локальную учетную запись для входа.</h4>
+                
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -28,34 +28,20 @@
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Выполнить вход" class="btn btn-default" />
+                        <input type="submit" value="Здійснити вхід" class="btn btn-default" />
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Регистрация нового пользователя", "Register")
+                    @Html.ActionLink("Реєстрація нового користувача", "Register")
                 </p>
-                @* Включите, когда будет включено подтверждение учетной записи для функции сброса пароля
-                    <p>
-                        @Html.ActionLink("Забыли пароль?", "ForgotPassword")
-                    </p>*@
+                
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    
 </div>
 
 @section Scripts {

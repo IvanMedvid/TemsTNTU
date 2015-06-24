@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TemsTNTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TemsTNTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -121,7 +121,7 @@
           <Property Name="id_report" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_artist" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="id_stage" Type="int" Nullable="false" />
-          <Property Name="stage" Type="varchar(max)" Nullable="false" />
+          <Property Name="stage" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="report_card">
           <Key>
@@ -131,7 +131,7 @@
           <Property Name="id_report" Type="int" Nullable="false" />
           <Property Name="fees" Type="float" Nullable="false" />
           <Property Name="number" Type="int" Nullable="false" />
-          <Property Name="main_job" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="main_job" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="stage">
           <Key>
@@ -311,25 +311,25 @@
         </Association>
         <Association Name="FK_report_card_report">
           <End Role="report" Type="Self.report" Multiplicity="1" />
-          <End Role="report_card" Type="Self.report_card" Multiplicity="0..1" />
+          <End Role="report_card" Type="Self.report_card" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="report">
               <PropertyRef Name="id_report" />
             </Principal>
             <Dependent Role="report_card">
-              <PropertyRef Name="id_rc" />
+              <PropertyRef Name="id_report" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_stage_state_topic">
           <End Role="state_topic" Type="Self.state_topic" Multiplicity="1" />
-          <End Role="stage" Type="Self.stage" Multiplicity="0..1" />
+          <End Role="stage" Type="Self.stage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="state_topic">
               <PropertyRef Name="id_st" />
             </Principal>
             <Dependent Role="stage">
-              <PropertyRef Name="id_stage" />
+              <PropertyRef Name="id_st" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -422,8 +422,7 @@
             <End Role="state_topic" EntitySet="state_topic" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TemsTNTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -543,10 +542,10 @@
           <Property Name="id_report" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_artist" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_stage" Type="Int32" Nullable="false" />
-          <Property Name="stage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="artist" Relationship="Self.FK_report_artist" FromRole="report" ToRole="artist" />
           <NavigationProperty Name="stage1" Relationship="Self.FK_id_stage" FromRole="report" ToRole="stage" />
-          <NavigationProperty Name="report_card" Relationship="Self.FK_report_card_report" FromRole="report" ToRole="report_card" />
+          <NavigationProperty Name="report_card" Relationship="TemsTNTUModel.FK_report_card_report1" FromRole="report" ToRole="report_card" />
         </EntityType>
         <EntityType Name="report_card">
           <Key>
@@ -557,7 +556,7 @@
           <Property Name="fees" Type="Double" Nullable="false" />
           <Property Name="number" Type="Int32" Nullable="false" />
           <Property Name="main_job" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="report" Relationship="Self.FK_report_card_report" FromRole="report_card" ToRole="report" />
+          <NavigationProperty Name="report" Relationship="TemsTNTUModel.FK_report_card_report1" FromRole="report_card" ToRole="report" />
         </EntityType>
         <EntityType Name="stage">
           <Key>
@@ -572,8 +571,8 @@
           <Property Name="time_end" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="id_artist" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="report" Relationship="Self.FK_id_stage" FromRole="stage" ToRole="report" />
-          <NavigationProperty Name="state_topic" Relationship="Self.FK_stage_state_topic" FromRole="stage" ToRole="state_topic" />
           <NavigationProperty Name="artist" Relationship="Self.artiststage" FromRole="stage" ToRole="artist" />
+          <NavigationProperty Name="state_topic" Relationship="TemsTNTUModel.FK_stage_state_topic1" FromRole="stage" ToRole="state_topic" />
         </EntityType>
         <EntityType Name="state_topic">
           <Key>
@@ -587,7 +586,7 @@
           <Property Name="id_artist" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="artist" Relationship="Self.FK_id_st" FromRole="state_topic" ToRole="artist" />
           <NavigationProperty Name="artist1" Relationship="Self.FK_state_topic_artist" FromRole="state_topic" ToRole="artist" />
-          <NavigationProperty Name="stage" Relationship="Self.FK_stage_state_topic" FromRole="state_topic" ToRole="stage" />
+          <NavigationProperty Name="stage1" Relationship="TemsTNTUModel.FK_stage_state_topic1" FromRole="state_topic" ToRole="stage" />
         </EntityType>
         <Association Name="FK_id_degree">
           <End Role="degree" Type="Self.degree" Multiplicity="0..1" />
@@ -701,30 +700,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_report_card_report">
-          <End Role="report" Type="Self.report" Multiplicity="1" />
-          <End Role="report_card" Type="Self.report_card" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="report">
-              <PropertyRef Name="id_report" />
-            </Principal>
-            <Dependent Role="report_card">
-              <PropertyRef Name="id_rc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_stage_state_topic">
-          <End Role="state_topic" Type="Self.state_topic" Multiplicity="1" />
-          <End Role="stage" Type="Self.stage" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="state_topic">
-              <PropertyRef Name="id_st" />
-            </Principal>
-            <Dependent Role="stage">
-              <PropertyRef Name="id_stage" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="artiststage">
           <End Role="artist" Type="Self.artist" Multiplicity="*" />
           <End Role="stage" Type="Self.stage" Multiplicity="*" />
@@ -783,14 +758,6 @@
             <End Role="stage" EntitySet="stage" />
             <End Role="report" EntitySet="report" />
           </AssociationSet>
-          <AssociationSet Name="FK_report_card_report" Association="Self.FK_report_card_report">
-            <End Role="report" EntitySet="report" />
-            <End Role="report_card" EntitySet="report_card" />
-          </AssociationSet>
-          <AssociationSet Name="FK_stage_state_topic" Association="Self.FK_stage_state_topic">
-            <End Role="state_topic" EntitySet="state_topic" />
-            <End Role="stage" EntitySet="stage" />
-          </AssociationSet>
           <AssociationSet Name="artiststage" Association="Self.artiststage">
             <End Role="artist" EntitySet="artist" />
             <End Role="stage" EntitySet="stage" />
@@ -799,7 +766,39 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_stage_state_topic1" Association="TemsTNTUModel.FK_stage_state_topic1">
+            <End Role="state_topic" EntitySet="state_topic" />
+            <End Role="stage" EntitySet="stage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_report_card_report1" Association="TemsTNTUModel.FK_report_card_report1">
+            <End Role="report" EntitySet="report" />
+            <End Role="report_card" EntitySet="report_card" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_stage_state_topic1">
+          <End Type="TemsTNTUModel.state_topic" Role="state_topic" Multiplicity="1" />
+          <End Type="TemsTNTUModel.stage" Role="stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state_topic">
+              <PropertyRef Name="id_st" />
+            </Principal>
+            <Dependent Role="stage">
+              <PropertyRef Name="id_st" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_report_card_report1">
+          <End Type="TemsTNTUModel.report" Role="report" Multiplicity="1" />
+          <End Type="TemsTNTUModel.report_card" Role="report_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="report">
+              <PropertyRef Name="id_report" />
+            </Principal>
+            <Dependent Role="report_card">
+              <PropertyRef Name="id_report" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

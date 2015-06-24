@@ -30,7 +30,7 @@ namespace WebApplication1.Models.DAL
         public string id_artist { get; set; }
     
         public virtual ICollection<report> report { get; set; }
-        public virtual state_topic state_topic { get; set; }
         public virtual ICollection<artist> artist { get; set; }
+        public virtual state_topic state_topic { get; set; }
     }
 }

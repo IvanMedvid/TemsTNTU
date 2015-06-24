@@ -33,6 +33,12 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
-        
+
+        [WordDocument]
+        public ActionResult AboutDocument()
+        {
+            ViewBag.WordDocumentFilename = "AboutMeDocument";
+            return View("Index");
+        }
     }
 }
